@@ -65,13 +65,17 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-if [ ! -d "$ZSH_CUSTOM/plugins/evalcache" ]; then
+ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+if [[ ! -d "$ZSH_CUSTOM/plugins/evalcache" ]]; then
     echo "Installing evalcache plugin..."
-    git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
+    git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM}/plugins/evalcache
 fi
 
 # Set Zsh as default shell
-if [ "$SHELL" != "$(which zsh)" ]; then
+if [[ "$SHELL" != "$(which zsh)" ]]; then
   echo "Setting Zsh as default shell..."
   chsh -s $(which zsh)
 fi
+
+echo "Done!"
