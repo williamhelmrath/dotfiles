@@ -5,7 +5,7 @@ _install_macos_packages() {
     # Check for Homebrew and install if not present
     if ! command -v brew &> /dev/null; then
     echo "Homebrew not found. Installing..."
-    #   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
     # Install essential packages
@@ -21,10 +21,12 @@ _install_macos_packages() {
         zsh
     )
 
+    brew update
+
     for package in "${BREW_PACKAGES[@]}"; do
         if ! brew list $package &> /dev/null; then
             echo "Installing $package..."
-            # brew install $package
+            brew install $package
         fi
     done
 }
@@ -40,10 +42,12 @@ _install_linux_packages() {
       zsh
     )
 
+    apt-get update
+
     for package in "${APT_PACKAGES[@]}"; do
         if ! apt-get list --installed $package &> /dev/null; then
             echo "Installing $package..."
-            # apt-get install $package
+            apt-get install $package
         fi
     done
 }
